@@ -16,8 +16,8 @@ done = False
 #start main loop
 while not done: 
     zombiesBehind = milesTraveled - zombiesTraveled
-    fullSpeed = random.ranrange(10, 21)
-    moderateSpeed = random.ranrange(5, 12)
+    fullSpeed = random.randrange(13, 21)
+    moderateSpeed = random.randrange(5, 12)
     print("""
     A. Drink the water.
     B. Ahead at the moderate speed.
@@ -26,57 +26,59 @@ while not done:
     E. Status check
     Q. Quit.""")
     print()
-    userInput = input("Your choice?")  
+    userInput = raw_input("Your choice?")  
     if userInput.lower() == "q":
-        done = true
-
-
-#status check
+        done = True
     elif userInput.lower() == "e":
         print("Miles traveled: ",milesTraveled)
         print("Drink water: ",water)
         print("Your car has ",gas,"amount of gas.")
-        print("The zombies are",zombiesBehind,"miles behind you"
-
-#stop for the night
+        print("The zombies are",zombiesBehind,"miles behind you")
     elif userInput.lower() == "d":
-        zombiesTraveled += random.randrange(7,20)
-        gas = gas + random.randrange(5,15)
+        zombiesTraveled += random.randrange(7,15)
+        gas = gas + random.randrange(5,10)
         water = water + random.randrange(1,3)
+        print("You feel rested and ready to start the next day")
         
 #move full speed
     elif userInput.lower() == "c":
-        print("You traveled ",fullSpeed,)"miles!")
+        print("You traveled ",fullSpeed,"miles!")
         milesTraveled += fullSpeed
         thirst += 1
-        gas = gas - 15
-        supplies_cache = random.randrange(1,21)
-        zombiesTraveled += random.randrange(7,15)
+        gas = gas - 10
+        supplies_cache = random.randrange(8,21)
+        zombiesTraveled += random.randrange(6,15)
         
 #move moderate speed
-    elif userInput.lower() == "b":moderateSpeed,)"miles!")
+    elif userInput.lower() == "b":
+        print("You went ",moderateSpeed,"miles!")
         milesTraveled += moderateSpeed
         thirst += 1
-        gas = gas - 15
-        supplies_cache = random.randrange(1,21)
+        gas = gas - 5
+        
+#supplies cache
+        supplies_cache = random.randrange(1,3)
         zombiesTraveled += random.randrange(7,15)
+        if supplies_cache == 2:
+            water += 6
+            print("your water is filled")
+            thirst *= 0
+            print("thirst is " ,thirst)
+            gas += 60
+            print ("gas is", gas)
         
 #drink water
     elif userInput.lower() == "a":
        if water == 0:
            print("Your out of water")
-        else:
+       else:
             thirst -= 1
             water -= 1
             
-#supplies cache
-    if supplies_cache == 15
-        thirst *= 0
-        gas += 20
         
-    if zombiesTraveled <= 15
+    if zombiesTraveled <= 15:
         print("zombies are closing in")
-    if milesTraveled is >= 200 and not done:
+    if milesTraveled >= 200 and not done:
         print("You have escaped the horrors or have you?")
         done = True
     if zombiesTraveled >= milesTraveled and not done:
@@ -92,7 +94,7 @@ while not done:
         
     if gas <= 25 and not done:
         print("You are running low on gas")
-    if gas == 0 and not done:
+    if gas <= 0 and not done:
         print("Your car died and the zombies caught up with ou and ate you")
         done = True 
         
